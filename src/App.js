@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import io from "socket.io-client";
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
-// const socket = io("http://localhost:5000", {
-const socket = io("https://truth-dare-server.onrender.com", {
+const socket = io(API_BASE, {
   withCredentials: true,
   autoConnect: true,
   reconnection: true,
@@ -132,7 +132,7 @@ function App() {
   const addPlayer = async () => {
     try {
       const res = await axios.post(
-        "https://truth-dare-server.onrender.com/api/players",
+        `${API_BASE}/api/players`,
         // "http://localhost:5000/api/players",
         playerForm
       );
@@ -181,7 +181,7 @@ function App() {
   const handleQuestionSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://truth-dare-server.onrender.com/api/questions", questionForm);
+      await axios.post(`${API_BASE}/api/questions`, questionForm);
       setQuestionForm({
         text: "",
         type: "truth",
