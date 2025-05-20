@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000", {
+// const socket = io("http://localhost:5000", {
+const socket = io("https://truth-dare-server.onrender.com", {
   withCredentials: true,
   autoConnect: true,
   reconnection: true,
@@ -131,7 +132,8 @@ function App() {
   const addPlayer = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/players",
+        "https://truth-dare-server.onrender.com/api/players",
+        // "http://localhost:5000/api/players",
         playerForm
       );
       const playerData = {
@@ -179,7 +181,7 @@ function App() {
   const handleQuestionSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/questions", questionForm);
+      await axios.post("https://truth-dare-server.onrender.com/api/questions", questionForm);
       setQuestionForm({
         text: "",
         type: "truth",
